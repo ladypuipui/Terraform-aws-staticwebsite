@@ -1,9 +1,5 @@
-resource "aws_route53_zone" "saws_route53_zonete_zone" {
+resource "aws_route53_zone" "site_zone" {
   name = "${var.root_domain}"
-
-  tags {
-    Name = "${var.root_domain}"
-  }
 }
 
 resource "aws_route53_record" "site" {

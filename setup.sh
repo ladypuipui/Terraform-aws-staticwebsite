@@ -83,4 +83,13 @@ EOF
 
 
 cd terraform ; terraform init
+HOSTZONEID=`aws route53 list-hosted-zones --profile dake --output json | grep Id | awk -F '/' '{print $3}'| sed -e "s/[\"'&;(,]//g"`
+ terraform import aws_route53_zone.site_zone $HOSTZONEID
 terraform plan
+
+echo "Can I actually do it?"
+
+
+terraform apply
+
+aws s3 cp terraform/index.html s3://$CNAME/ --profile $AWSPROFILE
