@@ -28,14 +28,15 @@ echo "Please type your Basicauth's Password"
 
 read BASICPW
 
-sed -i 's/profile \= "defaultprofile"/profile \= "$AWSPROFILE"/g' terraform/lambdaedge.tf 
-
 sed -i "s/ALLOWIP/$ALLOWIP/g" terraform/lambda/basic_auth/index.js 
 
-sed -i "s/hoge/$AWSPROFILE/g" terraform/main.tf 
+sed -i "s/defaultprofile/$AWSPROFILE/g" terraform/main.tf 
 
+sed -i "s/defaultprofile/$AWSPROFILE/g" terraform/lambdaedge.tf
 
-sed -i -e "s/BASICUSER/$BASICID/g" -e "s/BASICPASS/$BASICPW/g" terraform/lambda/basic_auth/index.js  
+sed -i "s/defaultprofile/$AWSPROFILE/g" terraform/acm.tf
+
+sed -i "s/BASICUSER/$BASICID/g" -e "s/BASICPASS/$BASICPW/g" terraform/lambda/basic_auth/index.js  
 
 cat  << EOF > terraform/variables.tf
 
