@@ -16,7 +16,7 @@ echo "Please type your stage's name (ex, live/staging/preview)"
 
 read STAGE
 
-echo "Please type the IP address from which you want to exclude Basicauth. (ex, '1.1.1.1','2.2.2.2' )"
+echo "Please type the IP address from which you want to exclude Basicauth. (ex, "'1.1.1.1','2.2.2.2'" )"
 
 read ALLOWIP
 
@@ -36,7 +36,7 @@ sed -i "s/defaultprofile/$AWSPROFILE/g" terraform/lambdaedge.tf
 
 sed -i "s/defaultprofile/$AWSPROFILE/g" terraform/acm.tf
 
-sed -e "s/BASICUSER/$BASICID/g" -e "s/BASICPASS/$BASICPW/g" terraform/lambda/basic_auth/index.js  
+sed -i -e "s/BASICUSER/$BASICID/g" -e "s/BASICPASS/$BASICPW/g" terraform/lambda/basic_auth/index.js  
 
 cat  << EOF > terraform/variables.tf
 
