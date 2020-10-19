@@ -16,7 +16,7 @@ echo "Please type your stage's name (ex, live/staging/preview)"
 
 read STAGE
 
-echo "Please type the IP address from which you want to exclude Basicauth. (ex, "'1.1.1.1','2.2.2.2'" )"
+echo "Please type the IP address from which you want to exclude Basicauth. (ex, \"'1.1.1.1','2.2.2.2'\" )"
 
 read ALLOWIP
 
