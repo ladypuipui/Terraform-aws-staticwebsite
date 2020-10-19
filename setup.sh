@@ -16,7 +16,7 @@ echo "Please type your stage's name (ex, live/staging/preview)"
 
 read STAGE
 
-echo "Please type the IP address from which you want to exclude Basicauth."
+echo "Please type the IP address from which you want to exclude Basicauth. (ex, '1.1.1.1','2.2.2.2' )"
 
 read ALLOWIP
 
@@ -36,7 +36,7 @@ sed -i "s/defaultprofile/$AWSPROFILE/g" terraform/lambdaedge.tf
 
 sed -i "s/defaultprofile/$AWSPROFILE/g" terraform/acm.tf
 
-sed -i "s/BASICUSER/$BASICID/g" -e "s/BASICPASS/$BASICPW/g" terraform/lambda/basic_auth/index.js  
+sed -e "s/BASICUSER/$BASICID/g" -e "s/BASICPASS/$BASICPW/g" terraform/lambda/basic_auth/index.js  
 
 cat  << EOF > terraform/variables.tf
 
@@ -83,13 +83,27 @@ EOF
 
 
 cd terraform ; terraform init
-HOSTZONEID=`aws route53 list-hosted-zones --profile dake --output json | grep Id | awk -F '/' '{print $3}'| sed -e "s/[\"'&;(,]//g"`
+HOSTZONEID=`aws route53 list-hosted-zones --profile $AWSPROFILE --output text | grep $ROOTDOMAIN | awk -F '/' '{print $3}' | awk '{print $1}'`
  terraform import aws_route53_zone.site_zone $HOSTZONEID
 terraform plan
 
-echo "Can I actually do it?"
-
+echo "Continue? (yes/no)"
+while true ; do
+    read ANSWER
+    case ${ANSWER} in
+        yes)
+            break
+            ;;
+         no)
+            echo "Terminated."
+            exit 0
+            ;;
+          *)
+            echo "Characters other than "yes" or "no" has been entered. Please re-enter."
+            ;;
+    esac
+done
 
 terraform apply
 
-aws s3 cp terraform/index.html s3://$CNAME/ --profile $AWSPROFILE
+aws s3 cp index.html s3://$CNAME/ --profile $AWSPROFILE

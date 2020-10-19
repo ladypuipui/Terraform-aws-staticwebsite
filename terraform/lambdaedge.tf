@@ -1,8 +1,4 @@
-provider "aws" {
-  region = "us-east-1"
-  alias  = "virginia"
-  profile = "defaultprofile"
-}
+
 
 data "archive_file" "basic_auth" {
   type        = "zip"

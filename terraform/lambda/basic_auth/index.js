@@ -2,7 +2,7 @@
 
 exports.handler = (event, context, callback) => {
 
-    const allowIp = ['ALLOWIP'];
+    const allowIp = [ALLOWIP];
 
     // Get request and request headers   
     const request = event.Records[0].cf.request;
