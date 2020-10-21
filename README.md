@@ -23,7 +23,7 @@ terraformを使って、cloudfront+S3+Basic認証(リダイレクトなし)の�
     ├── lambdaedge.tf
     ├── main.tf
     ├── output.tf
-    └── route5
+    └── route53
 
 ```
 
@@ -66,18 +66,17 @@ terraformを使って、cloudfront+S3+Basic認証(リダイレクトなし)の�
 
 
 1. 作業環境の用意
-	1. AWS cli2インストール  
-		1．https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2-linux.html  
-		2．aws configure --profile 〇〇　でクレデンシャルを登録（〇〇の部分、使います！)  	  
-    	1. terraform インストール
-		https://azukipochette.hatenablog.com/entry/2018/06/24/004354
+	* AWS cli2インストール  
+		* https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2-linux.html  
+		* aws configure --profile 〇〇　でクレデンシャルを登録（〇〇の部分、使います！)  	 
+		
+    * terraform インストール https://azukipochette.hatenablog.com/entry/2018/06/24/004354
 
-1. Git cloneする
+2. Git cloneする
 ```
 git clone git@github.com:ladypuipui/Terraform-aws-staticwebsite.git
 ```
-
-1. setup.sh  を実行
+3. setup.sh  を実行
 ```	
 cd serverless-cloudfront-s3-basicauth
 bash setup.sh
