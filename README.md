@@ -26,6 +26,15 @@ terraformを使って、cloudfront+S3+Basic認証(リダイレクトなし)の�
     └── route5
 
 ```
+
+### スクリプトを使える条件 ###
+
+* ルートドメイン名が決まっている（hogehoge.com)
+* サイトドメイン名が決まっている（www.hogehoge.com)
+* 同じAWSアカウント内のRoute53を使う
+* Route53にホストゾーンが作成済み
+* NSがRoute53に変更済み
+
  
 ### 処理の流れ ###
 
@@ -62,6 +71,11 @@ terraformを使って、cloudfront+S3+Basic認証(リダイレクトなし)の�
 		2．aws configure --profile 〇〇　でクレデンシャルを登録（〇〇の部分、使います！)  	  
     	1. terraform インストール
 		https://azukipochette.hatenablog.com/entry/2018/06/24/004354
+
+1. Git cloneする
+```
+git clone git@github.com:ladypuipui/Terraform-aws-staticwebsite.git
+```
 
 1. setup.sh  を実行
 ```	
